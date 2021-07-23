@@ -1,10 +1,10 @@
 const express = require('express');
 const server = express();
+server.use(express.json());
 
-server.get('/teste', (req, res) => {
-    res.send('ESSE É O BACKEND');
-})
+const DevRoutes = require('./routes/DevRoutes');
+server.use('/dev', DevRoutes);
 
 server.listen(3000, () => {
-    console.log('API ON');
+    console.log('API LIGADA - SEM ERROS');
 });
