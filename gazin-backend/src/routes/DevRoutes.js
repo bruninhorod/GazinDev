@@ -10,5 +10,4 @@ router.get('/:id', DevController.getById);
 router.get('/', DevController.getAll);
 router.delete('/:id', DevController.delete);
 
-
 module.exports = router;
