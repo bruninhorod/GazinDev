@@ -12,9 +12,7 @@ function Header() {
       <S.RightSide>
         <Link to="/">Início</Link>
         <span className="divisor"></span>
-        <Link to="/dev">Cadastro</Link>
-        <span className="divisor"></span>
-        <a href="/#">Consulta</a>
+        <Link to="/dev">Cadastrar Novo</Link>
       </S.RightSide>
     </S.Container>
   );

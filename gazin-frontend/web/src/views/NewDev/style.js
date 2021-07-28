@@ -32,6 +32,13 @@ export const Input = styled.div`
     border: none;
     border-bottom: 1px solid #ee6b26;
   }
+
+  select {
+    font-size: 16px;
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid #ee6b26;
+  }
 `;
 
 export const TextArea = styled.div`
@@ -114,4 +121,29 @@ export const Dropdown = styled.div`
   padding: 15px;
   border: none;
   border-bottom: 1px solid #ee6b26;
+`;
+
+export const InputReadOnly = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+
+  span {
+    color: #707070;
+    margin: 5px 0;
+    font-weight: bold;
+  }
+
+  input:hover {
+    opacity: 0.7;
+    background: #ccc;
+  }
+
+  input {
+    font-size: 16px;
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid #ee6b26;
+  }
 `;

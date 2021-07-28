@@ -1,8 +1,12 @@
 const DevModel = require('../model/DevModel');
-
+const DevValidation = require('../middleware/DevValidation');
 class DevController {
   async create(req, res) {
     const dev = new DevModel(req.body);
+    const response = DevValidation(req.body);
+
+    if (response.statusCode !== 201)
+      return res.status(response.statusCode).json(response.body);
 
     await dev
       .save()

@@ -2,27 +2,38 @@ import React, { useState, useEffect } from 'react';
 import * as S from './style';
 import api from '../../services/api';
 import { Redirect } from 'react-router-dom';
+import { format } from 'date-fns';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 function NewDev({ match }) {
+  let dateFns = require('date-fns');
+
   const [redirect, setRedirect] = useState(false);
   const [id, setId] = useState();
   const [nome, setNome] = useState();
   const [hobby, setHobby] = useState();
   const [datanascimento, setData] = useState();
-  const [idade, setIdade] = useState();
-  const [sexo, setSexo] = useState();
+
+  let [sexo = ['masculino', 'feminino', 'outros'], setSexo] = useState();
+  let [idade, setIdade] = useState();
 
   async function loadTaskDetail() {
     await api.get(`/dev/${match.params.id}`).then((response) => {
       setNome(response.data.nome);
       setHobby(response.data.hobby);
-      setData(response.data.datanascimento);
+      setData(format(new Date(response.data.datanascimento), 'yyyy-MM-dd'));
       setIdade(response.data.idade);
       setSexo(response.data.sexo);
     });
+  }
+
+  function retornaIdade(data) {
+    let date = dateFns.parse(data, 'yyyy-MM-dd', new Date());
+    let age = dateFns.differenceInCalendarYears(new Date(), date);
+
+    return age;
   }
 
   async function remove() {
@@ -52,6 +63,7 @@ function NewDev({ match }) {
           sexo,
         })
         .then(() => setRedirect(true));
+      alert('Desenvolvedor editado com sucesso');
     } else {
       await api
         .post('/dev', {
@@ -98,28 +110,28 @@ function NewDev({ match }) {
           <span>Data de nascimento: </span>
           <input
             type="date"
-            placeholder="DD/MM/YYYY"
+            placeholder="datanascimento"
             onChange={(e) => setData(e.target.value)}
             value={datanascimento}
           ></input>
         </S.Input>
-        <S.Input>
+        <S.InputReadOnly>
           <span>Idade: </span>
           <input
-            type="text"
-            placeholder="Idade"
+            type="number"
+            placeholder={idade}
             onChange={(e) => setIdade(e.target.value)}
-            value={idade}
+            value={(idade = retornaIdade(datanascimento))}
+            readOnly="true"
           ></input>
-        </S.Input>
+        </S.InputReadOnly>
         <S.Input>
           <span>Sexo: </span>
-          <input
-            type="text"
-            placeholder="Ex:Masculino, feminino, entre outros."
-            onChange={(e) => setSexo(e.target.value)}
-            value={sexo}
-          ></input>
+          <select type="text" onChange={(e) => setSexo(e.target.value)}>
+            <option value={sexo['masculino']}>Masculino</option>
+            <option value={sexo['feminino']}>Feminino</option>
+            <option value={sexo['outros']}>Outros</option>
+          </select>
         </S.Input>
 
         <S.Options>

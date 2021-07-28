@@ -1,8 +1,11 @@
 import React from 'react';
+import { format } from 'date-fns';
 import * as S from './style';
 import iconPerfil from '../../assets/icone-perfil.png';
 
 function DevCard({ nome, hobby, datanascimento, idade, sexo }) {
+  const date = format(new Date(datanascimento), 'dd/MM/yyyy');
+
   return (
     <S.Container>
       <S.TopCard>
@@ -11,7 +14,7 @@ function DevCard({ nome, hobby, datanascimento, idade, sexo }) {
       </S.TopCard>
       <S.BottomCard>
         <strong>{hobby}</strong>
-        <span>{datanascimento}</span>
+        <span>{date}</span>
         <span>{idade}</span>
         <span>{sexo}</span>
       </S.BottomCard>
