@@ -11,12 +11,11 @@ function NewDev({ match }) {
   let dateFns = require('date-fns');
 
   const [redirect, setRedirect] = useState(false);
-  const [id, setId] = useState();
   const [nome, setNome] = useState();
   const [hobby, setHobby] = useState();
   const [datanascimento, setData] = useState();
 
-  let [sexo = ['masculino', 'feminino', 'outros'], setSexo] = useState();
+  let [sexo, setSexo] = useState();
   let [idade, setIdade] = useState();
 
   async function loadTaskDetail() {
@@ -38,7 +37,7 @@ function NewDev({ match }) {
 
   async function remove() {
     const res = window.confirm('Tem certeza que deseja excluir esse dev?');
-    if (res == true) {
+    if (res === true) {
       await api.delete(`/dev/${match.params.id}`).then(() => setRedirect(true));
     } else {
       alert('Cadastro mantido.');
@@ -122,15 +121,14 @@ function NewDev({ match }) {
             placeholder={idade}
             onChange={(e) => setIdade(e.target.value)}
             value={(idade = retornaIdade(datanascimento))}
-            readOnly="true"
           ></input>
         </S.InputReadOnly>
         <S.Input>
           <span>Sexo: </span>
           <select type="text" onChange={(e) => setSexo(e.target.value)}>
-            <option value={sexo['masculino']}>Masculino</option>
-            <option value={sexo['feminino']}>Feminino</option>
-            <option value={sexo['outros']}>Outros</option>
+            <option value={(sexo = 'masculino')}>Masculino</option>
+            <option value={(sexo = 'feminino')}>Feminino</option>
+            <option value={(sexo = 'outros')}>Outros</option>
           </select>
         </S.Input>
 

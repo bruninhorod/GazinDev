@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  react-app:
+    container_name: react-app
+    build: ./gazin-frontend/web
+    stdin_open: true
+    ports:
+      - '3000:3000'
+    networks:
+      - mern-app
+
+  api-server:
+    container_name: api-server
+    ports:
+      - '3333:3333'
+    build: ./gazin-backend
+    networks:
+      - mern-app
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:3.6.19-xenial
+    ports:
+      - '27017:27017'
+    networks:
+      - mern-app
+    volumes:
+      - mongo-data:/data/db
+networks:
+  mern-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
