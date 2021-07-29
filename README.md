@@ -10,12 +10,15 @@ Projeto CRUD desenvolvido para o teste técnico da empresa gazin
 ```
 
 ## Como rodar o projeto:
+Rodar npm install na gazin-back end
+Rodar npm install na gazin-front end
 
 Clonar o projeto e rodar o comando abaixo na pasta raiz no terminal do vs code.
 
 docker-compose up -d --build
 
-
+Aplicação rodando ---------------------
+Após um post válido, os registros ficam armazenados na tela Home/inicio do projeto e podem ser editados quando selecionado o card.
 ```
 ## Todas as tecnologias utilizadas:
 
